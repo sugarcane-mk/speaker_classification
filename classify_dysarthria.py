@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from sklearn.impute import SimpleImputer
+
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
