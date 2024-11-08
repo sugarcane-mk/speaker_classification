@@ -1,0 +1,5 @@
+git+https://github.com/openai/whisper.git  # Whisper package from GitHub
+torch>=1.10.0                          # PyTorch (required for running Whisper)
+librosa>=0.8.1                         # For audio preprocessing (loading and resampling)
+numpy>=1.21.0                          # For numerical operations
+scikit-learn>=0.24.2                    # For machine learning (e.g., SVM classifier)
