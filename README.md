@@ -51,9 +51,12 @@ dysarthria-classification/
 │
 ├── torgo/                         # Folder containing Torgo dataset
 │   ├── audio/                     # Audio files organized by class and speaker
-│   │   ├── mild/                  # Mild Dysarthria audio files
-│   │   ├── moderate/              # Moderate Dysarthria audio files
-│   │   └── severe/                # Severe Dysarthria audio files
+│   │   ├── mild/                  # Mild Dysarthria speakers
+|   |   |     ├── speaker1/        # Speaker folders
+|   |   |     |   audio1.wav...    # Audio files
+|   |   |     └── speaker2/...
+│   │   ├── moderate/              # Moderate Dysarthria speakers
+│   │   └── severe/                # Severe Dysarthria speakers
 │   └── embeddings/                # Extracted Whisper embeddings (in .npy format)
 │       ├── mild/                  # Embeddings for mild class
 │       ├── moderate/              # Embeddings for moderate class
