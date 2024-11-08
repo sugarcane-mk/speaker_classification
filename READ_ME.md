@@ -1,7 +1,3 @@
-Certainly! Below is a detailed `README.md` tailored for your project, which focuses on the classification of **Dysarthria** (speech disorders) using **Whisper embeddings** and **SVM** with datasets from **Torgo** and **UA Speech**. The classification is done in two tasks: 1) **Normal vs. Dysarthria**, and 2) **Mild, Moderate, and Severe Dysarthria**. 
-
----
-
 # Dysarthria Classification Using Speech Embeddings from Whisper and SVM
 
 This repository contains code and resources for classifying **Dysarthria** severity levels using **Speech Embeddings** extracted from OpenAI's **Whisper** model. We use **Support Vector Machines (SVM)** for classification based on embeddings obtained from the **Torgo** and **UA Speech** datasets.
