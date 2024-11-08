@@ -122,10 +122,6 @@ This repository is open-source and available under the MIT License.
 
 ---
 
-Feel free to modify the code as needed for your specific task, and don’t hesitate to open issues or submit pull requests if you find any bugs or improvements!
-
----
-
 ### Notes:
 
 - **Performance**: Whisper's larger models (`medium`, `large`) provide better feature representations but require more computational resources (GPU recommended). If you have limited resources, you can use smaller models, but the quality of embeddings may vary.
@@ -155,5 +151,5 @@ python extract_embeddings.py
 ```
 
 ---
-
+Feel free to modify the code as needed for your specific task, and don’t hesitate to open issues or submit pull requests if you find any bugs or improvements!
 Let me know if you need further modifications or explanations!
