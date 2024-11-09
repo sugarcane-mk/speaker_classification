@@ -6,12 +6,25 @@ from transformers import WhisperProcessor, WhisperModel
 import torch.nn.functional as F
 
 # Define paths and parameters
-data_dir = "/path/to/audio_dir"  # Replace with the actual path to your data directory
-output_dir = "/path/to/save_emneddings"  # Replace with the desired output directory
+data_dir = "/home/sltlab/priya/DATA/torgo_data"  # Replace with the actual path to your data directory
+output_dir = "/home/sltlab/priya/embeddings/torgo/whisper_small_c/"  # Replace with the desired output directory
 model_name = "openai/whisper-small"  # You can choose other model variants like whisper-base, whisper-large, etc.
 
-# Create the output directory if it doesn't exist
-os.makedirs(output_dir, exist_ok=True)
+# Creating subdirs for output_dir
+# Assuming data is to be organized as:
+# torgo_data/embeddings
+#     speaker_class_label1/
+#             audio1_embeddings.npy
+#             audio2_embeddings.npy
+#     speaker_class_label2/
+#             audio1_embeddings.npy
+#             audio2_embeddings.npy
+
+speaker_folders = os.listdir(data_dir)
+for speaker in speaker_folders:
+    speaker_path = os.path.join(output_dir, speaker)
+    os.makedirs(speaker_path, exist_ok=True)
+
 
 # Load WhisperProcessor and WhisperModel
 processor = WhisperProcessor.from_pretrained(model_name)
@@ -67,17 +80,37 @@ def extract_embeddings(audio_file):
         return None
 
 # Iterate through all audio files in the data directory
+# for root, _, files in os.walk(data_dir):
+#     for file in files:
+#         if file.endswith(".wav"):
+#             audio_path = os.path.join(root, file)
+#             audio_name = os.path.splitext(file)[0]  # Remove the file extension
+            
+#             # Construct the output filename
+#             output_filename = os.path.join(output_dir, speaker,  f"{audio_name}_embedding.npy")
+            
+#             # Extract embeddings and save to file
+#             embeddings = extract_embeddings(audio_path)
+#             if embeddings is not None:
+#                 np.save(output_filename, embeddings)
+#                 print(f"Embeddings for {audio_name} saved to {output_filename}")
+
 for root, _, files in os.walk(data_dir):
     for file in files:
         if file.endswith(".wav"):
             audio_path = os.path.join(root, file)
-            audio_name = os.path.splitext(file)[0]  # Remove the file extension
-            
+            relative_path = os.path.relpath(audio_path, data_dir)
+            parts = relative_path.split(os.sep)
+
             # Construct the output filename
-            output_filename = os.path.join(output_dir, f"{audio_name}_embedding.npy")
-            
-            # Extract embeddings and save to file
-            embeddings = extract_embeddings(audio_path)
-            if embeddings is not None:
-                np.save(output_filename, embeddings)
-                print(f"Embeddings for {audio_name} saved to {output_filename}")
+            if len(parts) >= 3:  # Assuming the structure is data/speaker/device/audio.wav
+                speaker = parts[0]
+                audio_name = os.path.splitext(file)[0]
+                output_filename = os.path.join(output_dir, speaker, f"{audio_name}_embedding.npy") # Saves embeddings in Sub_directories
+                
+                # Extract and save the embeddings
+                embeddings = extract_embeddings(audio_path)
+                if embeddings is not None:
+                    np.save(output_filename, embeddings)
+                    print(f"Embeddings saved to {output_filename}")
+print ("Saved all embeddings to the sub-directories of class lables mild, moderate, severe, normal.")
