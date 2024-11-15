@@ -104,18 +104,6 @@ predictions = classifier.predict([embeddings])
 print(predictions)
 ```
 
-## Project Structure
-
-```
-whisper-embeddings/
-│
-├── extract_embeddings.py  # Python script for extracting Whisper embeddings
-│
-├── your_audio_file.wav    # Example audio file (replace with your own)
-│
-└── README.md              # This README file
-```
-
 ## License
 
 This repository is open-source and available under the MIT License.
@@ -149,7 +137,11 @@ pip install -r requirements.txt
 ```bash
 python extract_embeddings.py
 ```
+3. Run the `classify_embeddings.py` script to classify embedings:
 
+```bash
+python classify_svm.py
+```
 ---
 Feel free to modify the code as needed for your specific task, and don’t hesitate to open issues or submit pull requests if you find any bugs or improvements!
 Let me know if you need further modifications or explanations!
