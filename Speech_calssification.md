@@ -49,7 +49,7 @@ The directory structure follows the format below:
 ```
 dysarthria-classification/
 │
-├── torgo/                         # Folder containing Torgo dataset
+├── data/                         # Folder containing dataset
 │   ├── audio/                     # Audio files organized by class and speaker
 │   │   ├── mild/                  # Mild Dysarthria speakers
 |   |   |     ├── speaker1/        # Speaker folders
@@ -70,21 +70,23 @@ dysarthria-classification/
 
 ### 1. **Data Organization**
 
-The speech audio data is organized in the `torgo/audio/class/speakername/audio.wav` format, and the Whisper embeddings are stored as `.npy` files in the `torgo/embeddings/class/embedding_file.npy` directory.
+The speech audio data is organized in the `data/audio/class/speakername/audio.wav` format, and the Whisper embeddings are stored as `.npy` files in the `torgo/embeddings/class/embedding_file.npy` directory.
 
 - **Audio Files**: 
-  - `torgo/audio/mild/speaker1/audio.wav`
-  - `torgo/audio/moderate/speaker2/audio.wav`
-  - `torgo/audio/severe/speaker3/audio.wav`
+  - `data/audio/mild/speaker1/audio.wav`
+  - `data/audio/moderate/speaker2/audio.wav`
+  - `data/audio/severe/speaker3/audio.wav`
 
 - **Embeddings**:
-  - `torgo/embeddings/mild/embedding_speaker1.npy`
-  - `torgo/embeddings/moderate/embedding_speaker2.npy`
-  - `torgo/embeddings/severe/embedding_speaker3.npy`
+  - `data/embeddings/mild/embedding_speaker1.npy`
+  - `data/embeddings/moderate/embedding_speaker2.npy`
+  - `data/embeddings/severe/embedding_speaker3.npy`
 
 ### 2. **Extracting Embeddings Using Whisper**
 
-The Whisper model is used to extract embeddings from the audio files. You can modify the code to extract embeddings if you don’t have them yet. Here’s a sample function to [https://github.com/sugarcane-mk/whisper/blob/main/extract_embeddings.py](extract embeddings) from audio using Whisper
+The Whisper model is used to extract embeddings from the audio files. You can modify the code to extract embeddings if you don’t have them yet. Here’s a sample function to [extract embeddings](https://github.com/sugarcane-mk/whisper/blob/main/extract_embeddings.py) from audio using Whisper.
+
+Note : The embeddings are extracted from final layer of the model you can also extract from inial layer or any specified layer of the model.
 
 ### 3. **Training the SVM Classifier**
 
@@ -111,8 +113,8 @@ def load_embeddings_and_labels(embedding_dir, label):
     return np.array(embeddings), np.array(labels)
 
 # Example: Load data for binary classification (Normal vs Dysarthria)
-mild_embeddings, mild_labels = load_embeddings_and_labels('torgo/embeddings/mild/', 0)  # 0 for Dysarthria
-normal_embeddings, normal_labels = load_embeddings_and_labels('torgo/embeddings/normal/', 1)  # 1 for Normal
+mild_embeddings, mild_labels = load_embeddings_and_labels('data/embeddings/mild/', 0)  # 0 for Dysarthria
+normal_embeddings, normal_labels = load_embeddings_and_labels('data/embeddings/normal/', 1)  # 1 for Normal
 
 # Combine datasets
 X = np.vstack([mild_embeddings, normal_embeddings])
@@ -130,6 +132,8 @@ y_pred = svm_clf.predict(X_test)
 print(classification_report(y_test, y_pred))
 ```
 
+Kindly refer [Speech_classification.ipynb](https://github.com/sugarcane-mk/whisper/blob/main/speech_clasiification.ipynb) for detailed procedure.
+
 ### 4. **Evaluating the Model**
 
 You can evaluate the trained SVM model on the test set and generate classification metrics using the `classification_report` function from `scikit-learn`.
@@ -144,6 +148,7 @@ To run the classification process, you can execute the `classify_dysarthria.py` 
 ```bash
 python classify_dysarthria.py
 ```
+Also you can run [Speech_classification.ipynb](https://github.com/sugarcane-mk/whisper/blob/main/speech_clasiification.ipynb)  for both embedding extraction and classification.
 
 ## Example Outputs
 
