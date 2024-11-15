@@ -137,10 +137,10 @@ pip install -r requirements.txt
 ```bash
 python extract_embeddings.py
 ```
-3. Run the `classify_embeddings.py` script to classify embedings:
+3. Run the `classification_svm.py` script to classify embedings:
 
 ```bash
-python classify_svm.py
+python classification_svm.py
 ```
 ---
 Feel free to modify the code as needed for your specific task, and don’t hesitate to open issues or submit pull requests if you find any bugs or improvements!
