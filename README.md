@@ -115,6 +115,8 @@ This repository is open-source and available under the MIT License.
 - **Performance**: Whisper's larger models (`medium`, `large`) provide better feature representations but require more computational resources (GPU recommended). If you have limited resources, you can use smaller models, but the quality of embeddings may vary.
   
 - **Audio Preprocessing**: Whisper works best with 16kHz mono-channel audio. You may want to preprocess your audio files accordingly (e.g., resampling using `librosa` or other tools).
+  
+- **Embedding Extraction and clasification**: Take a look at [Speech clasifation.md](https://github.com/sugarcane-mk/whisper/blob/main/Speech_calssification.md) for detailed procedure for data preparation, embedding extraction and classification.
 
 ---
 
