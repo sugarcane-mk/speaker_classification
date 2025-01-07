@@ -1,4 +1,4 @@
-# Whisper Embedding Extraction
+# Audio Embedding Extraction
 
 This repository contains a Python script to extract embeddings from the OpenAI Whisper model for speech classification or other downstream tasks. Whisper is a powerful automatic speech recognition (ASR) model that can be used to generate speech embeddings from raw audio input.
 
